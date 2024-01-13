@@ -1,10 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/hatrnuhn/pokedexcli/internal/pokeapi"
+)
+
+type config struct {
+	pokeapiClient       pokeapi.Client
+	nextLocationAreaURL *string
+	prevLocationAreaURL *string
+}
 
 func main() {
-	fmt.Println("Welcome to Pokedex!")
-	fmt.Println("type \"help\" for available commands")
+	cfg := config{
+		pokeapiClient: pokeapi.NewClient(),
+	}
 
-	startRepl()
+	fmt.Println("Welcome to Pokedex!")
+	fmt.Println("Type \"help\" for available commands")
+
+	startRepl(&cfg)
 }
