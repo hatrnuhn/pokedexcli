@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/hatrnuhn/pokedexcli/internal/pokeapi"
 )
@@ -14,7 +15,7 @@ type config struct {
 
 func main() {
 	cfg := config{
-		pokeapiClient: pokeapi.NewClient(),
+		pokeapiClient: pokeapi.NewClient(time.Hour / 2),
 	}
 
 	fmt.Println("Welcome to Pokedex!")
