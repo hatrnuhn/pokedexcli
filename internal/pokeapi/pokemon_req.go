@@ -1,5 +1,6 @@
 package pokeapi
 
+// this should return one certain pokemon
 func (c *Client) PokemonReq(pokemon string) (PokemonResp, error) {
 	endpoint := "/pokemon/" + pokemon
 	fullUrl := baseURL + endpoint

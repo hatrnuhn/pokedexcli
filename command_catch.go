@@ -8,6 +8,11 @@ import (
 )
 
 func commandCatch(cfg *config, pokemon string) error {
+	if pokemon == "" {
+		fmt.Println("Usage: catch pokémon_name")
+		return nil
+	}
+
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
 
