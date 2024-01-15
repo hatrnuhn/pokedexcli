@@ -1,8 +1,12 @@
 package main
 
-import "os"
+import (
+	"os"
 
-func commandExit(cfg *config, _ string, _ map[string]bool) error {
+	"github.com/hatrnuhn/pokedexcli/internal/config"
+)
+
+func commandExit(cfg *config.Config, _ string, _ map[string]bool) error {
 	os.Exit(0)
 	return nil
 }

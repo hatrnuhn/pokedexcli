@@ -5,9 +5,11 @@ import (
 	"math"
 	"math/rand"
 	"time"
+
+	"github.com/hatrnuhn/pokedexcli/internal/config"
 )
 
-func commandCatch(cfg *config, pokemon string, allPokemons map[string]bool) error {
+func commandCatch(cfg *config.Config, pokemon string, allPokemons map[string]bool) error {
 	if pokemon == "" {
 		fmt.Println("Usage: catch pokémon_name, replace spaces with \"-\" if any")
 		return nil
@@ -23,7 +25,7 @@ func commandCatch(cfg *config, pokemon string, allPokemons map[string]bool) erro
 
 	fmt.Println("Throwing a Pokeball at ", pokemon)
 
-	resp, err := cfg.pokeapiClient.PokemonReq(pokemon)
+	resp, err := cfg.PokeapiClient.PokemonReq(pokemon)
 	if err != nil {
 		return err
 	}
