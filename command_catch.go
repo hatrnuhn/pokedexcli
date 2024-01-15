@@ -30,8 +30,11 @@ func commandCatch(cfg *config.Config, pokemon string, allPokemons map[string]boo
 		return err
 	}
 
-	probability := 1 / (1 + math.Log10(float64(resp.BaseExperience)+1))
-	isSuccess := r.Float64() < probability
+	prob := 0.65 * math.Exp(-0.0112*float64(resp.BaseExperience))
+	fmt.Println(prob)
+	rFloat := r.Float64()
+	fmt.Println(rFloat)
+	isSuccess := rFloat < prob
 
 	if isSuccess {
 		fmt.Println(pokemon, "was caught!")
