@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/hatrnuhn/pokedexcli/internal/config"
 )
 
-func startRepl(cfg *config, allPokemonsName map[string]bool) {
+func startRepl(cfg *config.Config, allPokemonsName map[string]bool) {
 	// create a new scanner that reads from std input
 	scanner := bufio.NewScanner(os.Stdin)
 
@@ -57,7 +59,7 @@ func startRepl(cfg *config, allPokemonsName map[string]bool) {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config, string, map[string]bool) error
+	callback    func(*config.Config, string, map[string]bool) error
 }
 
 func getCommands() map[string]cliCommand {

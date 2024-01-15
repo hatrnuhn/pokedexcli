@@ -3,10 +3,12 @@ package main
 import (
 	"errors"
 	"fmt"
+
+	"github.com/hatrnuhn/pokedexcli/internal/config"
 )
 
-func commandMap(cfg *config, _ string, _ map[string]bool) error {
-	resp, err := cfg.pokeapiClient.ListLocationAreas(cfg.nextLocationAreaURL)
+func commandMap(cfg *config.Config, _ string, _ map[string]bool) error {
+	resp, err := cfg.PokeapiClient.ListLocationAreas(cfg.NextLocationAreaURL)
 	if err != nil {
 		return err
 	}
@@ -16,18 +18,18 @@ func commandMap(cfg *config, _ string, _ map[string]bool) error {
 		fmt.Printf("- %s\n", area.Name)
 	}
 
-	cfg.nextLocationAreaURL = resp.Next
-	cfg.prevLocationAreaURL = resp.Previous
+	cfg.NextLocationAreaURL = resp.Next
+	cfg.PrevLocationAreaURL = resp.Previous
 
 	return nil
 
 }
 
-func commandMapb(cfg *config, _ string, _ map[string]bool) error {
-	if cfg.prevLocationAreaURL == nil {
+func commandMapb(cfg *config.Config, _ string, _ map[string]bool) error {
+	if cfg.PrevLocationAreaURL == nil {
 		return errors.New("you're on the first page")
 	}
-	resp, err := cfg.pokeapiClient.ListLocationAreas(cfg.prevLocationAreaURL)
+	resp, err := cfg.PokeapiClient.ListLocationAreas(cfg.PrevLocationAreaURL)
 	if err != nil {
 		return err
 	}
@@ -37,8 +39,8 @@ func commandMapb(cfg *config, _ string, _ map[string]bool) error {
 		fmt.Printf("- %s\n", area.Name)
 	}
 
-	cfg.nextLocationAreaURL = resp.Next
-	cfg.prevLocationAreaURL = resp.Previous
+	cfg.NextLocationAreaURL = resp.Next
+	cfg.PrevLocationAreaURL = resp.Previous
 
 	return nil
 

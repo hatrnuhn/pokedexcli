@@ -2,15 +2,17 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/hatrnuhn/pokedexcli/internal/config"
 )
 
-func commandExplore(cfg *config, areaName string, _ map[string]bool) error {
+func commandExplore(cfg *config.Config, areaName string, _ map[string]bool) error {
 	if areaName == "" {
 		fmt.Println("Usage: explore area_name")
 		return nil
 	}
 
-	resp, err := cfg.pokeapiClient.ListPokemonsInArea(areaName)
+	resp, err := cfg.PokeapiClient.ListPokemonsInArea(areaName)
 	if err != nil {
 		return err
 	}
