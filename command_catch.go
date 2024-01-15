@@ -7,9 +7,14 @@ import (
 	"time"
 )
 
-func commandCatch(cfg *config, pokemon string) error {
+func commandCatch(cfg *config, pokemon string, allPokemons map[string]bool) error {
 	if pokemon == "" {
-		fmt.Println("Usage: catch pokémon_name")
+		fmt.Println("Usage: catch pokémon_name, replace spaces with \"-\" if any")
+		return nil
+	}
+
+	if !allPokemons[pokemon] {
+		fmt.Println("pokémon is not found, make sure to type it right!")
 		return nil
 	}
 

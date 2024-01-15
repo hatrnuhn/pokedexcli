@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandExplore(cfg *config, areaName string) error {
+func commandExplore(cfg *config, areaName string, _ map[string]bool) error {
 	if areaName == "" {
 		fmt.Println("Usage: explore area_name")
 		return nil

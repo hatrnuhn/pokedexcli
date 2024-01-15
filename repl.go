@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func startRepl(cfg *config) {
+func startRepl(cfg *config, allPokemonsName map[string]bool) {
 	// create a new scanner that reads from std input
 	scanner := bufio.NewScanner(os.Stdin)
 
@@ -36,6 +36,7 @@ func startRepl(cfg *config) {
 
 		// get available commands
 		availableCommands := getCommands()
+		// allPokemons := utils.GetAllPokemons()
 
 		// print invalid command when command is unavailable then continue the input loop
 		command, ok := availableCommands[userCommand]
@@ -45,7 +46,7 @@ func startRepl(cfg *config) {
 		}
 
 		// else execute the function
-		err := command.callback(cfg, userArgument)
+		err := command.callback(cfg, userArgument, allPokemonsName)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -56,7 +57,7 @@ func startRepl(cfg *config) {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config, string) error
+	callback    func(*config, string, map[string]bool) error
 }
 
 func getCommands() map[string]cliCommand {
