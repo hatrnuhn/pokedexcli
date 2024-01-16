@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/hatrnuhn/pokedexcli/internal/config"
+	"github.com/hatrnuhn/pokedexcli/internal/data/user"
 	"github.com/hatrnuhn/pokedexcli/internal/pokeapi"
 	"github.com/hatrnuhn/pokedexcli/internal/utils"
 )
@@ -12,6 +13,7 @@ import (
 func main() {
 	cfg := config.Config{
 		PokeapiClient: pokeapi.NewClient(time.Hour / 2),
+		UserPokedex:   user.NewPokedex(),
 	}
 
 	allPokemonsName, _ := utils.GetAllPokemons(&cfg)

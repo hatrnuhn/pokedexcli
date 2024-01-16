@@ -23,13 +23,20 @@ func commandCatch(cfg *config.Config, pokemon string, allPokemons map[string]boo
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
 
-	fmt.Println("Throwing a Pokeball at ", pokemon)
-
 	resp, err := cfg.PokeapiClient.PokemonReq(pokemon)
 	if err != nil {
 		return err
 	}
 
+	// checks whether user input exists in user's Pokedex
+	_, ok := cfg.UserPokedex.Get(pokemon)
+	if ok {
+		return fmt.Errorf("%v is already in your Pokedex", pokemon)
+	}
+
+	fmt.Println("Throwing a Pokeball at ", pokemon)
+
+	// chance gets harder diminishingly as base exp increases
 	prob := 0.65 * math.Exp(-0.0112*float64(resp.BaseExperience))
 	fmt.Println(prob)
 	rFloat := r.Float64()
@@ -38,6 +45,12 @@ func commandCatch(cfg *config.Config, pokemon string, allPokemons map[string]boo
 
 	if isSuccess {
 		fmt.Println(pokemon, "was caught!")
+
+		// add pokemon to user's Pokedex when caught
+		err = cfg.UserPokedex.Add(pokemon, resp)
+		if err != nil {
+			return err
+		}
 	} else {
 		fmt.Println(pokemon, " escaped!")
 	}
