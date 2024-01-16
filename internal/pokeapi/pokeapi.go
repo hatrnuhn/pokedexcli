@@ -7,16 +7,16 @@ import (
 	"github.com/hatrnuhn/pokedexcli/internal/pokecache"
 )
 
-const baseURL = "https://pokeapi.co/api/v2"
+const BaseURL = "https://pokeapi.co/api/v2"
 
 type Client struct {
-	cache      pokecache.Cache
+	Cache      pokecache.Cache
 	httpClient http.Client
 }
 
 func NewClient(cacheInterval time.Duration) Client {
 	return Client{
-		cache: pokecache.NewCache(cacheInterval),
+		Cache: pokecache.NewCache(cacheInterval),
 		httpClient: http.Client{
 			Timeout: time.Minute,
 		},

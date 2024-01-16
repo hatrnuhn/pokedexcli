@@ -2,7 +2,7 @@ package pokeapi
 
 func (c *Client) ListPokemonsInArea(areaName string) (PokemonsInAreaResp, error) {
 	endpoint := "/location-area/" + areaName
-	fullUrl := baseURL + endpoint
+	fullUrl := BaseURL + endpoint
 	pokemonInAreaResp := PokemonsInAreaResp{}
 	err := c.sendGetReq(fullUrl, &pokemonInAreaResp)
 	if err != nil {

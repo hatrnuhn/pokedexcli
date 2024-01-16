@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"math/rand"
 	"time"
 
@@ -37,7 +36,10 @@ func commandCatch(cfg *config.Config, pokemon string, allPokemons map[string]boo
 	fmt.Println("Throwing a Pokeball at ", pokemon)
 
 	// chance gets harder diminishingly as base exp increases
-	prob := 0.65 * math.Exp(-0.0112*float64(resp.BaseExperience))
+	/*
+		prob := 0.65 * math.Exp(-0.0112*float64(resp.BaseExperience))
+	*/
+	prob := 1.0
 	fmt.Println(prob)
 	rFloat := r.Float64()
 	fmt.Println(rFloat)

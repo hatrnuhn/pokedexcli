@@ -8,7 +8,7 @@ import (
 )
 
 func (c *Client) sendGetReq(fullUrl string, v interface{}) error {
-	dat, ok := c.cache.Get(fullUrl)
+	dat, ok := c.Cache.Get(fullUrl)
 	if ok {
 		fmt.Println("cache hit!")
 		err := json.Unmarshal(dat, v)
@@ -44,7 +44,7 @@ func (c *Client) sendGetReq(fullUrl string, v interface{}) error {
 		return err
 	}
 
-	c.cache.Add(fullUrl, dat)
+	c.Cache.Add(fullUrl, dat)
 
 	return nil
 }

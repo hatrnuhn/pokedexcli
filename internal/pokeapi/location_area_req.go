@@ -2,7 +2,7 @@ package pokeapi
 
 func (c *Client) ListLocationAreas(pageURL *string) (LocationAreasResp, error) {
 	endpoint := "/location-area"
-	fullUrl := baseURL + endpoint
+	fullUrl := BaseURL + endpoint
 	if pageURL != nil {
 		fullUrl = *pageURL
 	}

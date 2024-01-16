@@ -5,7 +5,7 @@ import "fmt"
 // this should return one certain pokemon
 func (c *Client) PokemonReq(pokemon string) (PokemonResp, error) {
 	endpoint := "/pokemon/" + pokemon
-	fullUrl := baseURL + endpoint
+	fullUrl := BaseURL + endpoint
 
 	pokemonResp := PokemonResp{}
 
@@ -19,7 +19,7 @@ func (c *Client) PokemonReq(pokemon string) (PokemonResp, error) {
 
 func (c *Client) PokemonsListReq() (PokemonsListResp, error) {
 	endpoint := fmt.Sprintf("/pokemon?limit=%v", "1")
-	fullUrl := baseURL + endpoint
+	fullUrl := BaseURL + endpoint
 
 	pokemonsListResp := PokemonsListResp{}
 	err := c.sendGetReq(fullUrl, &pokemonsListResp)
@@ -28,7 +28,7 @@ func (c *Client) PokemonsListReq() (PokemonsListResp, error) {
 	}
 
 	pokemonsCount := pokemonsListResp.Count
-	fullUrl = baseURL + fmt.Sprintf("/pokemon?limit=%v", pokemonsCount)
+	fullUrl = BaseURL + fmt.Sprintf("/pokemon?limit=%v", pokemonsCount)
 	err = c.sendGetReq(fullUrl, &pokemonsListResp)
 	if err != nil {
 		return PokemonsListResp{}, err
