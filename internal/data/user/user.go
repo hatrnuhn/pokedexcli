@@ -1,6 +1,7 @@
 package user
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/hatrnuhn/pokedexcli/internal/pokeapi"
@@ -38,4 +39,12 @@ func (pdx *UserPokedex) Remove(pkName string) error {
 func (pdx *UserPokedex) Get(pkName string) (pokeapi.PokemonResp, bool) {
 	val, ok := pdx.userPokedex[pkName]
 	return val, ok
+}
+
+func (pdx *UserPokedex) GetUserPokedex() (map[string]pokeapi.PokemonResp, error) {
+	if len(pdx.userPokedex) == 0 {
+		return pdx.userPokedex, errors.New("pokedex is empty")
+	}
+
+	return pdx.userPokedex, nil
 }

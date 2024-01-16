@@ -10,14 +10,12 @@ import (
 func (c *Client) sendGetReq(fullUrl string, v interface{}) error {
 	dat, ok := c.Cache.Get(fullUrl)
 	if ok {
-		fmt.Println("cache hit!")
 		err := json.Unmarshal(dat, v)
 		if err != nil {
 			return err
 		}
 		return nil
 	}
-	fmt.Println("cache miss!")
 
 	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {
